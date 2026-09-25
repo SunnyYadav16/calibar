@@ -1,0 +1,2 @@
+# calibar
+Calibrated command bar
