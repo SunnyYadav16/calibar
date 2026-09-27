@@ -19,3 +19,25 @@ target
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+# Private planning docs: kept local, never committed or pushed
+/cue-v1-spec.md
+/cue-v1-tasks.md
+
+# AI assistant local state (shared project settings stay tracked)
+.claude/settings.local.json
+.claude/worktrees/
+CLAUDE.local.md
+.superpowers/
+
+# Secrets, keys and signing material (updater key, dev signing identity)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# OS clutter
+.DS_Store
