@@ -21,8 +21,8 @@ target
 #.idea/
 
 # Private planning docs: kept local, never committed or pushed
-/cue-v1-spec.md
-/cue-v1-tasks.md
+/calibar-v1-spec.md
+/calibar-v1-tasks.md
 
 # AI assistant local state (shared project settings stay tracked)
 .claude/settings.local.json
@@ -49,3 +49,9 @@ CLAUDE.local.md
 node_modules/
 dist/
 apps/desktop/src-tauri/gen/
+
+# Python
+__pycache__/
+.venv/
+.pytest_cache/
+.hypothesis/

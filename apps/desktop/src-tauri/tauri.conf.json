@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Cue",
+  "productName": "calibar",
   "version": "0.1.0",
-  "identifier": "app.cue.desktop",
+  "identifier": "app.calibar.desktop",
   "build": {
     "beforeDevCommand": "bun run dev",
     "beforeBuildCommand": "bun run build",
@@ -11,7 +11,7 @@
   },
   "app": {
     "windows": [
-      { "label": "main", "title": "Cue", "visible": false }
+      { "label": "main", "title": "calibar", "visible": false }
     ],
     "security": {
       "csp": "default-src 'self'; connect-src ipc: http://ipc.localhost"

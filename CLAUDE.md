@@ -1,4 +1,4 @@
-# calibar (Cue)
+# calibar
 
 Keyboard-first desktop command bar for macOS and Windows. Press a hotkey, type a sentence, and the bar turns into the right card or action while you type. TypeSafe's Jev model picks the meaning; deterministic Rust code extracts values, computes results and runs actions; a risk tier (T0–T3) decides whether Enter runs, asks first, or refuses. Thesis: **AI decides meaning. Code owns facts. Risk determines autonomy.** Stack: Tauri 2 + Rust core, React 19 UI, Python eval harness.
 
@@ -10,8 +10,8 @@ The spec and backlog are **local-only on purpose**: git-ignored, never committed
 
 | Need | Go to |
 |---|---|
-| Next task, its **Do** and **Done when**; the M2 path | [cue-v1-tasks.md](cue-v1-tasks.md) |
-| Goals, non-goals, prohibited actions P1–P7 | [cue-v1-spec.md](cue-v1-spec.md) §2 |
+| Next task, its **Do** and **Done when**; the M2 path | [calibar-v1-tasks.md](calibar-v1-tasks.md) |
+| Goals, non-goals, prohibited actions P1–P7 | [calibar-v1-spec.md](calibar-v1-spec.md) §2 |
 | Verified facts F1–F21, facts to verify V2–V15 | spec §3.2, §3.3 |
 | Trust boundary, where Tauri stops | spec §5.2 |
 | Tickets, `select` and pinning, T3 timing | spec §5.2.1 |
@@ -38,14 +38,14 @@ The spec and backlog are **local-only on purpose**: git-ignored, never committed
 1. **The core decides; the UI renders.** Every decision, argument, computed value and piece of evidence lives in the Rust core. The UI holds only ticket IDs and runs actions only through `execute(ticket)`, which takes no arguments (A3, §5.2.1).
 2. **Jev picks; code computes.** The model chooses among options. Parsers and code-generated candidate lists supply every argument. Never ask Jev to extract values, do math, compare dates, count or judge hex colors (A1, A2, F4).
 3. **Code against contracts, not other tasks.** Each contract in App. F has one fake and one contract-test suite that the fake and every real implementation run. If a dependency isn't built, fake it in a `testing/` module. Changing a contract means a spec change-log entry and an updated fake in the same PR.
-4. **Tauri lives only in `cue-app`** (I11). Plugin-backed implementations (notifications, dialogs, autostart, hotkey, single instance, tray, updater) live there too. `cue-platform` is native-only. The core reaches the app only through `AppControl` and `ViewSink`.
-5. **Every network request leaves through `cue-egress`** (I9). The one exception is the updater. No HTTP client crate or `std::net` socket anywhere else; cargo-deny and clippy enforce this.
+4. **Tauri lives only in `calibar-app`** (I11). Plugin-backed implementations (notifications, dialogs, autostart, hotkey, single instance, tray, updater) live there too. `calibar-platform` is native-only. The core reaches the app only through `AppControl` and `ViewSink`.
+5. **Every network request leaves through `calibar-egress`** (I9). The one exception is the updater. No HTTP client crate or `std::net` socket anywhere else; cargo-deny and clippy enforce this.
 6. **No command-specific branches in core code** (A5, G5). A new command is a manifest, a parser and an executor. Precedence is `suppresses` data. Thresholds are eval output, never hand-tuned numbers (A6, D2).
 
 ## Silent-failure traps
 
 - **Offline softmax.** Unmatched *and* suppressed commands are removed from the softmax. A score of 0 still gets e⁰ of the probability mass and quietly shrinks p1 and margin (§5.6).
-- **Frontmost app.** While the bar is open, Cue is the frontmost app. Window and paste actions must act on the `Target` captured when the hotkey fired (§5.8.6).
+- **Frontmost app.** While the bar is open, calibar is the frontmost app. Window and paste actions must act on the `Target` captured when the hotkey fired (§5.8.6).
 - **The T3 dialog steals focus.** Don't treat that as the bar closing, because closing the bar expires every ticket. Expiry is frozen while the dialog is open, and gate rules 2 and 3 run again after confirmation (§5.2.1).
 - **Cache keys.**
   - The provider cache is keyed by the exact request hash, which includes the candidate options. Never key it on (schema hash, text).
@@ -63,7 +63,7 @@ The spec and backlog are **local-only on purpose**: git-ignored, never committed
 ## Security, privacy, secrets
 
 - No telemetry. Label logging is opt-in and exported by hand.
-- Provider keys live in the OS keychain through `cue-secrets`. They are write-only from the UI, never logged and never cross into the webview. No keys in the repo or in `.env` files that get committed.
+- Provider keys live in the OS keychain through `calibar-secrets`. They are write-only from the UI, never logged and never cross into the webview. No keys in the repo or in `.env` files that get committed.
 - **Webview.**
   - The CSP allows only IPC and bundled assets.
   - The capability grants only the §5.4 IPC commands (I8): no shell, filesystem, opener, HTTP, window, event or updater permissions.
@@ -87,7 +87,7 @@ bun install && bun test                     # UI and packages (REPO-06)
 bun run check                               # typecheck, lint, manifest and invariant checks
 bun tauri dev                               # run the app (REPO-03)
 uv sync --locked                            # eval harness, tools/eval (REPO-04)
-uv run cue-eval run --changed               # required eval diff when criteria or questions change
+uv run calibar-eval run --changed               # required eval diff when criteria or questions change
 ```
 
 ## Workflow
@@ -104,8 +104,8 @@ uv run cue-eval run --changed               # required eval diff when criteria o
 
 ## Name
 
-The repo is **calibar** ("Calibrated command bar"). The product's working name is **Cue**, a placeholder until the trademark check (REL-05). Crates are `cue-*`, the Tauri crate is `cue-app`, the Python package is `cue_eval` and the CLI is `cue-eval`. Don't rename anything to `calibar` without a recorded decision.
+The project is **calibar** ("Calibrated command bar") everywhere: repo, product, UI. Crates are `calibar-*`, the Tauri crate is `calibar-app`, the Python package is `calibar_eval` and the CLI is `calibar-eval`. Never use "Cue" or `cue-*`.
 
 ## Keeping this file useful
 
-Stay under 200 lines. Add a trap only after it has bitten or the spec names it. Link to sections instead of copying them. Update the **Now** line at each milestone. When a directory builds up its own traps (for example `cue-decide/` or `tools/eval/`), give it its own `CLAUDE.md`.
+Stay under 200 lines. Add a trap only after it has bitten or the spec names it. Link to sections instead of copying them. Update the **Now** line at each milestone. When a directory builds up its own traps (for example `calibar-decide/` or `tools/eval/`), give it its own `CLAUDE.md`.

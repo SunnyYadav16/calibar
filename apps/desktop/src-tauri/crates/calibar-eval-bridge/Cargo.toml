@@ -1,5 +1,5 @@
 [package]
-name = "cue-providers"
+name = "calibar-eval-bridge"
 version.workspace = true
 edition.workspace = true
 publish.workspace = true

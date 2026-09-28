@@ -231,6 +231,54 @@ dependencies = [
 ]
 
 [[package]]
+name = "calibar-app"
+version = "0.1.0"
+dependencies = [
+ "tauri",
+ "tauri-build",
+]
+
+[[package]]
+name = "calibar-core"
+version = "0.1.0"
+
+[[package]]
+name = "calibar-decide"
+version = "0.1.0"
+
+[[package]]
+name = "calibar-egress"
+version = "0.1.0"
+
+[[package]]
+name = "calibar-eval-bridge"
+version = "0.1.0"
+
+[[package]]
+name = "calibar-exec"
+version = "0.1.0"
+
+[[package]]
+name = "calibar-platform"
+version = "0.1.0"
+
+[[package]]
+name = "calibar-providers"
+version = "0.1.0"
+
+[[package]]
+name = "calibar-scheduler"
+version = "0.1.0"
+
+[[package]]
+name = "calibar-secrets"
+version = "0.1.0"
+
+[[package]]
+name = "calibar-store"
+version = "0.1.0"
+
+[[package]]
 name = "camino"
 version = "1.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -459,54 +507,6 @@ name = "ctor"
 version = "1.0.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "914a755b7c2d4af2bdcff7ce1739e2db9a1b81a9b07123d8015786ae03c0980d"
-
-[[package]]
-name = "cue-app"
-version = "0.1.0"
-dependencies = [
- "tauri",
- "tauri-build",
-]
-
-[[package]]
-name = "cue-core"
-version = "0.1.0"
-
-[[package]]
-name = "cue-decide"
-version = "0.1.0"
-
-[[package]]
-name = "cue-egress"
-version = "0.1.0"
-
-[[package]]
-name = "cue-eval-bridge"
-version = "0.1.0"
-
-[[package]]
-name = "cue-exec"
-version = "0.1.0"
-
-[[package]]
-name = "cue-platform"
-version = "0.1.0"
-
-[[package]]
-name = "cue-providers"
-version = "0.1.0"
-
-[[package]]
-name = "cue-scheduler"
-version = "0.1.0"
-
-[[package]]
-name = "cue-secrets"
-version = "0.1.0"
-
-[[package]]
-name = "cue-store"
-version = "0.1.0"
 
 [[package]]
 name = "darling"

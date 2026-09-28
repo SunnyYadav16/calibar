@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "cue-desktop",
+      "name": "calibar-desktop",
       "dependencies": {
         "react": "^19",
         "react-dom": "^19",
