@@ -1,5 +1,5 @@
 [package]
-name = "cue-eval-bridge"
+name = "calibar-egress"
 version.workspace = true
 edition.workspace = true
 publish.workspace = true

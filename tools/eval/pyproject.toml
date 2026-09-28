@@ -1,0 +1,20 @@
+[project]
+name = "calibar-eval"
+version = "0.1.0"
+description = "Eval harness CLI for calibar: dataset validation, metrics, threshold tuning and reports."
+requires-python = ">=3.14"
+dependencies = ["typer>=0.15"]
+
+[project.scripts]
+calibar-eval = "calibar_eval.cli:app"
+
+[dependency-groups]
+dev = ["scikit-learn", "hypothesis"]
+test = ["pytest"]
+
+[tool.uv]
+default-groups = ["dev", "test"]
+
+[build-system]
+requires = ["uv_build>=0.12.19,<0.13.0"]
+build-backend = "uv_build"

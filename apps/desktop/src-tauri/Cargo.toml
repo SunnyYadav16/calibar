@@ -1,12 +1,12 @@
 [package]
-name = "cue-app"
-description = "Cue desktop app. The only crate allowed to depend on Tauri (I11)."
+name = "calibar-app"
+description = "calibar desktop app. The only crate allowed to depend on Tauri (I11)."
 version.workspace = true
 edition.workspace = true
 publish.workspace = true
 
 [lib]
-name = "cue_app_lib"
+name = "calibar_app_lib"
 
 [lints]
 workspace = true
