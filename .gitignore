@@ -41,3 +41,6 @@ CLAUDE.local.md
 
 # OS clutter
 .DS_Store
+
+# Eval run outputs
+/runs/
