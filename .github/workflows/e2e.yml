@@ -1,0 +1,33 @@
+name: End to end
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos-smoke:
+    name: macOS smoke test
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: apps/desktop
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: apps/desktop/src-tauri
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: apps/desktop/package.json
+      - run: bun install --frozen-lockfile
+      - run: bun run e2e:build
+      - run: bun run e2e

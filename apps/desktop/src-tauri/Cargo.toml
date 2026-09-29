@@ -29,6 +29,11 @@ all = { level = "warn", priority = -1 }
 
 [dependencies]
 tauri = { version = "2", features = [] }
+tauri-plugin-wdio-webdriver = { version = "1.4.0", optional = true }
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
+
+[features]
+# Test builds only: embeds a WebDriver server for the macOS end-to-end tests.
+e2e = ["dep:tauri-plugin-wdio-webdriver"]
