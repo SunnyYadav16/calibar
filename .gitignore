@@ -55,3 +55,6 @@ __pycache__/
 .venv/
 .pytest_cache/
 .hypothesis/
+
+# Read-only Shapeshift reference copy (scripts/fetch-shapeshift.sh)
+/third_party/
