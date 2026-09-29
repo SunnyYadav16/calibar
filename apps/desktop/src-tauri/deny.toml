@@ -1,0 +1,35 @@
+[graph]
+targets = ["aarch64-apple-darwin", "x86_64-apple-darwin", "x86_64-pc-windows-msvc"]
+
+[advisories]
+ignore = []
+
+[licenses]
+# Unicode-3.0 and Zlib are required by Tauri's own ICU/URL stack and foldhash; not in spec 5.16.
+allow = ["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "ISC", "MPL-2.0", "Unicode-3.0", "Zlib"]
+confidence-threshold = 0.8
+
+[licenses.private]
+ignore = true
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+allow-wildcard-paths = true
+deny = [
+  # I9: HTTP clients only under calibar-egress and the updater plugin.
+  { crate = "reqwest", wrappers = ["calibar-egress", "tauri-plugin-updater"] },
+  { crate = "hyper", wrappers = ["reqwest", "hyper-util", "hyper-rustls"] },
+  { crate = "hyper-util", wrappers = ["reqwest", "hyper-rustls"] },
+  { crate = "ureq", wrappers = ["calibar-egress"] },
+  { crate = "isahc", wrappers = ["calibar-egress"] },
+  { crate = "surf", wrappers = ["calibar-egress"] },
+  { crate = "attohttpc", wrappers = ["calibar-egress"] },
+  { crate = "minreq", wrappers = ["calibar-egress"] },
+  { crate = "curl", wrappers = ["calibar-egress"] },
+]
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
