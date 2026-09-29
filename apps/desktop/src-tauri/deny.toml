@@ -27,6 +27,16 @@ deny = [
   { crate = "attohttpc", wrappers = ["calibar-egress"] },
   { crate = "minreq", wrappers = ["calibar-egress"] },
   { crate = "curl", wrappers = ["calibar-egress"] },
+  # I11: Tauri only under calibar-app and its plugin crates.
+  { crate = "tauri", wrappers = [
+    "calibar-app",
+    "tauri-plugin-notification",
+    "tauri-plugin-dialog",
+    "tauri-plugin-autostart",
+    "tauri-plugin-global-shortcut",
+    "tauri-plugin-single-instance",
+    "tauri-plugin-updater",
+  ] },
 ]
 
 [sources]
