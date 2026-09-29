@@ -1,0 +1,34 @@
+name: Python
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: python-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: lint, typecheck, test, audit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/eval
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+        with:
+          enable-cache: true
+          cache-dependency-glob: tools/eval/uv.lock
+      - run: uv sync --locked
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pyright
+      - run: uv run pytest
+      - run: uv export --locked --no-emit-project -o requirements-audit.txt
+      - run: uvx pip-audit==2.10.1 -r requirements-audit.txt --no-deps --disable-pip
