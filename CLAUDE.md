@@ -82,7 +82,7 @@ Planned. Each line becomes true when its REPO task lands. Keep this block in syn
 ```bash
 cargo build && cargo test                   # Rust workspace, root apps/desktop/src-tauri (REPO-02)
 cargo clippy --all-targets -- -D warnings   # REPO-05
-cargo deny check                            # licenses, advisories, HTTP and Tauri bans (REPO-08, REPO-12)
+cargo deny --workspace check                # licenses, advisories, HTTP and Tauri bans (REPO-08, REPO-12)
 bun install && bun test                     # UI and packages (REPO-06)
 bun run check                               # typecheck, lint, manifest and invariant checks
 bun tauri dev                               # run the app (REPO-03)
