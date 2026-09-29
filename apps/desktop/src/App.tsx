@@ -1,3 +1,3 @@
 export function App() {
-  return <input autoFocus placeholder="Type a command" />;
+  return <input placeholder="Type a command" />;
 }
